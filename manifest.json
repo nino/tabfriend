@@ -1,0 +1,13 @@
+{
+  "description": "Tools for managing tabs",
+  "manifest_version": 2,
+  "name": "TabFriend",
+  "version": "1.0",
+  "homepage_url": "https://github.com/nino/tabfriend",
+  "icons": { "96": "icon.png" },
+  "permissions": ["tabs", "<all_urls>"],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  }
+}
