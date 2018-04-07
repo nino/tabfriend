@@ -1,0 +1,30 @@
+#columns {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+#columns > div {
+  width: 200px;
+  display: flex;
+  flex-flow: column;
+}
+
+button {
+  height: 22px;
+  border: 1px solid #cccccc;
+  background: #f2f2f2;
+  margin: 2px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  outline: none;
+  text-align: left;
+}
+
+button.-active-tab {
+  background: #d0d0d0;
+}
+
+button.-hovered {
+  background: #e6e6e6;
+}
