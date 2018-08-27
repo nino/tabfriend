@@ -16,11 +16,18 @@ const updateTabHoverClasses = () => {
     .forEach(el => el.classList.add("-hovered"));
 };
 
+/**
+ * @param {number} index
+ */
 const hoverTab = index => {
   hoverState.hoveredTab = index;
   updateTabHoverClasses();
 };
 
+/**
+ * @param {number} start
+ * @param {number} end
+ */
 const detachRange = async (start, end) => {
   const tabs = await p(chrome.tabs.query, { currentWindow: true });
   const newWindow = await p(chrome.windows.create, {
