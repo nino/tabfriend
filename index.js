@@ -30,11 +30,23 @@ const hoverTab = index => {
  */
 const detachRange = async (start, end) => {
   const tabs = await p(chrome.tabs.query, { currentWindow: true });
+  const tabsToMove = tabs.slice(start, end);
+  const firstTabToMove = tabsToMove[0].active
+    ? tabsToMove[tabsToMove.length - 1]
+    : tabsToMove[0];
   const newWindow = await p(chrome.windows.create, {
-    tabId: tabs[start].id,
+    // If we move the currently selected tab first,
+    // the new window will be active,
+    // and then we can't move the other tabs anymore.
+    // If we're only moving one tab,
+    // then we do want to move the selected tab first, obviously.
+    tabId: firstTabToMove.id,
   });
-  const tabsToMove = tabs.slice(start + 1, end).map(tab => tab.id);
-  await p(chrome.tabs.move, tabsToMove, { windowId: newWindow.id, index: -1 });
+  const tabsToMoveIds = tabsToMove.map(tab => tab.id);
+  await p(chrome.tabs.move, tabsToMoveIds, {
+    windowId: newWindow.id,
+    index: -1,
+  });
 };
 
 const detachHoveredRange = async () => {
